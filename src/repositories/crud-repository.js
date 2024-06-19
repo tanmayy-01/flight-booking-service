@@ -18,6 +18,7 @@ class CrudRepository {
         id: data,
       },
     });
+    console.log(response,'destroy')
     if(!response) {
         throw new AppError('Not able to find the resource',StatusCodes.NOT_FOUND)
     }
@@ -45,6 +46,9 @@ class CrudRepository {
         id: id,
       },
     });
+    if(!response[0]) {
+        throw new AppError('Not able to find the resource',StatusCodes.NOT_FOUND)
+    }
     return response;
   }
 }
