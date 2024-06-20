@@ -38,7 +38,7 @@ async function getAirplane(id) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
             throw new AppError('The airplane you requested is not present', error.statusCode)
         }
-        throw new AppError('Cannot fetch all the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot fetch the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -50,7 +50,7 @@ async function destroyAirplane(id) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
             throw new AppError('The airplane you requested to delete is not present', error.statusCode)
         }
-        throw new AppError('Cannot fetch all the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot delete the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -62,7 +62,7 @@ async function updateAirplane(id,data) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
             throw new AppError('The airplane you requested to update is not present', error.statusCode)
         }
-        throw new AppError('Cannot fetch all the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot update the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
