@@ -16,7 +16,7 @@ async function createCity(data) {
             })
             throw new AppError(explanation, StatusCodes.BAD_REQUEST)
         }
-        throw new AppError('Cannot create a new City object', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot create a new city object', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -26,13 +26,26 @@ async function destroyCity(id) {
         return city;
     } catch (error) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
-            throw new AppError('The City you requested to delete is not present', error.statusCode)
+            throw new AppError('The city you requested to delete is not present', error.statusCode)
         }
         throw new AppError('Cannot Delete the city', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
+async function updateCity(id,data) {
+    try {
+        const city = await cityRepository.update(id,data);
+        return city;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('The city you requested to update is not present', error.statusCode)
+        }
+        throw new AppError('Cannot update the city', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     createCity,
-    destroyCity
+    destroyCity,
+    updateCity
 }

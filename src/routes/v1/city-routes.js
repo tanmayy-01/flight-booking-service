@@ -17,5 +17,11 @@ router.delete(
   CityController.destroyCity
 ); 
 
+// /api/v1/city/:id PATCH
+router.patch(
+  '/:id',
+  CityController.updateCity
+); 
+
 
 module.exports = router;
