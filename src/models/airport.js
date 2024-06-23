@@ -12,8 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
         this.belongsTo(models.City, {
           foreignKey: 'cityId',
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
         })
     }
   }
