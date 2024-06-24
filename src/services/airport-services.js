@@ -2,11 +2,11 @@ const {AirportRepository} = require('../repositories');
 const AppError = require('../utils/errors/app-error');
 const {StatusCodes} = require('http-status-codes')
 
-const airportRepository = new AirportReopository();
+const airportRepository = new AirportRepository();
 
 async function createAirport(data) {
     try {
-        const airport = await AirportRepository.create(data);
+        const airport = await airportRepository.create(data);
         return airport;
     } catch (error) {
         if(error.name == 'SequelizeValidationError') {
