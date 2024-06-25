@@ -11,16 +11,13 @@ const { SuccessResponse, ErrorResponse } = require('../utils/common');
         arraivalAirportId: 5,
         arraivalTime: '11:10:00',
         departureTime: '09:10:00',
-        boardingGate: req.body.boardingGate,
-        totalSeats: req.body.totalSeats,
+        price: 2000,
+        boardingGate: '12A',
+        totalSeats: 120,
     }
 
 */
 
-/**
- * 
- * npx sequelize model:generate --name Flight --attributes flightNumber:string,airplaneId:integer,departureAirportId:string,arraivalAirportId:string,arraivalTime:date,departureTime:date,boardingGate:string,totalSeats:integer
- */
 async function createFlight(req,res) {
 
     try {
@@ -31,6 +28,7 @@ async function createFlight(req,res) {
             arraivalAirportId: req.body.arraivalAirportId,
             arraivalTime: req.body.arraivalTime,
             departureTime: req.body.departureTime,
+            price: req.body.price,
             boardingGate: req.body.boardingGate,
             totalSeats: req.body.totalSeats,
         });
@@ -44,6 +42,5 @@ async function createFlight(req,res) {
 
 module.exports = {
     createFlight,
-    
 }
 
