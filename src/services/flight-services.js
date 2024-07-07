@@ -2,6 +2,7 @@ const {FlightRepository} = require('../repositories');
 const AppError = require('../utils/errors/app-error');
 const {StatusCodes} = require('http-status-codes');
 const { query } = require('../config/logger-config');
+const { Op } = require('sequelize');
 
 const flightRepository = new FlightRepository();
 
@@ -24,12 +25,25 @@ async function createFlight(data) {
 async function getAllFlights(query) {
     // trips = MUM-DEL
     let customFilter = {};
+    let sortFilter = [];
     if(query.trips) {
         [departureAirportId, arraivalAirportId] = query.trips.split("-")
         customFilter.departureAirportId = departureAirportId;
         customFilter.arraivalAirportId = arraivalAirportId;
     }
-    console.log(customFilter)
+
+    if(query.price) {
+        [minPrice, maxPrice] = query.price.split('-');
+        customFilter.price = {
+            [Op.between] : [minPrice, ((maxPrice == undefined) ? 20000 : maxPrice)]
+        }
+    }
+
+    if(query.sort) {
+        const params = query.sort.split(',');
+        const sortFilters = params.map((param) => param.split('_'));
+        sortFilter =  sortFilters;
+    }
     try {
         console.log('inside...................')
         const flights = await flightRepository.getAllFlights(customFilter);
